@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header -->
 <div class="page-header d-print-none py-3">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         <div class="row g-2 align-items-center">
             <div class="col">
                 <div class="page-pretitle text-secondary">
@@ -30,7 +30,7 @@
 
 <!-- Page Body -->
 <div class="page-body">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         <!-- Empty dashboard content - only footer remains via layout -->
     </div>
 </div>

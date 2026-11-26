@@ -17,7 +17,7 @@ class SetLocale
     {
         $locale = Session::get('locale', config('app.locale', 'id'));
 
-        if (! in_array($locale, ['id', 'en'], true)) {
+        if (! in_array($locale, ['id', 'en', 'ko'], true)) {
             $locale = 'id';
         }
 

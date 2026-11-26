@@ -38,6 +38,7 @@
     "Ganti Mode Gelap / Terang": "Ganti Mode Gelap / Terang",
     "Buka menu user": "Buka menu user",
     "Dashboard": "Dashboard",
+    "Dashboard Curah Hujan": "Dashboard Curah Hujan",
     "Dashboard AWS": "Dashboard AWS",
     "Dashboard AWS (Automatic Weather Station)": "Dashboard AWS (Automatic Weather Station)",
     "Dashboard Areal Statement": "Dashboard Areal Statement",
@@ -125,6 +126,9 @@
     "dari": "dari",
     "pengguna": "pengguna",
     "API Android": "API Android",
+    "Setting": "Pengaturan",
+    "Shortcut": "Shortcut",
+    "Kelola Shortcut Menu": "Kelola Shortcut Menu",
     "Keluar (Logout)": "Keluar (Logout)",
     "Hak Cipta Dilindungi.": "Hak Cipta Dilindungi."
 }

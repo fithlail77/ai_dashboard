@@ -35,7 +35,7 @@
 @section('content')
 <!-- Page Header -->
 <div class="page-header d-print-none py-3">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         <div class="row g-2 align-items-center">
             <div class="col">
                 <div class="page-pretitle text-secondary">
@@ -66,7 +66,7 @@
 
 <!-- Page Body -->
 <div class="page-body mt-2">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         <div class="card shadow-sm border-0">
             <div class="card-body p-0">
                 <div class="powerbi-wrapper shadow-none" id="powerbi-container">

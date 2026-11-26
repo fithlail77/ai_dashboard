@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header -->
 <div class="page-header d-print-none py-3">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         <div class="row g-2 align-items-center">
             <div class="col">
                 <div class="page-pretitle text-secondary">
@@ -21,7 +21,7 @@
 
 <!-- Page Body -->
 <div class="page-body">
-    <div class="container-xl">
+    <div class="container-fluid px-3 px-md-4">
         @if (session('success'))
             <div class="alert alert-important alert-success alert-dismissible shadow-sm mb-3" role="alert">
                 <div class="d-flex align-items-center">

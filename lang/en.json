@@ -38,6 +38,7 @@
     "Ganti Mode Gelap / Terang": "Toggle Dark / Light Mode",
     "Buka menu user": "Open user menu",
     "Dashboard": "Dashboard",
+    "Dashboard Curah Hujan": "Rainfall Dashboard",
     "Dashboard AWS": "AWS Dashboard",
     "Dashboard AWS (Automatic Weather Station)": "AWS Dashboard (Automatic Weather Station)",
     "Dashboard Areal Statement": "Areal Statement Dashboard",
@@ -125,6 +126,9 @@
     "dari": "of",
     "pengguna": "users",
     "API Android": "Android API",
+    "Setting": "Setting",
+    "Shortcut": "Shortcut",
+    "Kelola Shortcut Menu": "Manage Shortcut Menus",
     "Keluar (Logout)": "Sign Out",
     "Hak Cipta Dilindungi.": "All Rights Reserved."
 }

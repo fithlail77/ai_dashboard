@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/lang/{locale}', function (string $locale) {
-        if (in_array($locale, ['id', 'en'], true)) {
+        if (in_array($locale, ['id', 'en', 'ko'], true)) {
             session(['locale' => $locale]);
         }
 
