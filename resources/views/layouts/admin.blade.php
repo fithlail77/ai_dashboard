@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Dashboard - Tabler PT GUM')</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
@@ -27,16 +28,23 @@
     <style>
         .sub-navbar {
             min-height: 2.75rem;
+            height: 2.75rem;
             background-color: var(--tblr-bg-surface);
+            border-bottom: 1px solid var(--tblr-border-color);
+        }
+
+        .sub-navbar .container-fluid {
+            height: 100%;
         }
 
         .sub-navbar .navbar-nav {
             margin: 0;
             padding: 0;
+            height: 100%;
         }
 
         .sub-navbar .navbar-nav .nav-link {
-            padding: 0.65rem 0.95rem;
+            padding: 0.5rem 0.95rem;
             color: var(--tblr-body-color);
             font-size: 0.875rem;
             display: inline-flex;
@@ -44,6 +52,7 @@
             gap: 0.35rem;
             border-bottom: none !important;
             transition: all 0.15s ease-in-out;
+            height: 100%;
         }
 
         .sub-navbar .navbar-nav .nav-item.active>.nav-link,
@@ -103,18 +112,20 @@
         }
 
         .shortcut-header {
-            padding: 0.65rem 0.85rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 0.5rem 0.85rem;
+            border-bottom: 1px solid var(--tblr-border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: rgba(0, 0, 0, 0.02);
-            min-height: 42px;
+            min-height: 2.75rem;
+            height: 2.75rem;
+            box-sizing: border-box;
         }
 
         [data-bs-theme="dark"] .shortcut-header,
         .theme-dark .shortcut-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid var(--tblr-border-color);
             background-color: rgba(255, 255, 255, 0.02);
         }
 
@@ -248,7 +259,7 @@
         @media (max-width: 767.98px) {
             .shortcut-sidebar {
                 position: fixed;
-                top: 110px;
+                top: 57px;
                 bottom: 0;
                 left: -220px;
                 z-index: 1040;
@@ -391,118 +402,8 @@
             </div>
         </header>
 
-        <!-- SUB-HEADER NAVBAR (Double Header Baris Kedua sesuai Gambar Pengguna) -->
-        <header class="navbar navbar-expand border-bottom bg-body py-0 sub-navbar">
-            <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-sm btn-icon btn-ghost-secondary d-md-none me-2" id="btn-mobile-shortcut" title="Buka Shortcut">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-primary" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
-                    </button>
-                    <ul class="navbar-nav flex-row flex-wrap align-items-center">
-                    <!-- 1. Beranda -->
-                    <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('dashboard') }}">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">{{ __('Beranda') }}</span>
-                        </a>
-                    </li>
-
-                    <!-- 2. Dashboard (Dropdown) -->
-                    <li class="nav-item dropdown {{ request()->routeIs('dashboard.curah-hujan') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#navbar-dashboard" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-box"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                                    <path d="M12 12l8 -4.5" />
-                                    <path d="M12 12l0 9" />
-                                    <path d="M12 12l-8 -4.5" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">{{ __('Dashboard') }}</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.curah-hujan') ? 'active' : '' }}" href="{{ route('dashboard.curah-hujan') }}">{{ __('Curah Hujan') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.aws') ? 'active' : '' }}" href="{{ route('dashboard.aws') }}">{{ __('AWS') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.areal-statement') ? 'active' : '' }}" href="{{ route('dashboard.areal-statement') }}">{{ __('Areal Statement') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.produksi') ? 'active' : '' }}" href="{{ route('dashboard.produksi') }}">{{ __('Produksi') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.analisa-produksi-kebun') ? 'active' : '' }}" href="{{ route('dashboard.analisa-produksi-kebun') }}">{{ __('Analisa Produksi Kebun') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.pemupukan-perawatan') ? 'active' : '' }}" href="{{ route('dashboard.pemupukan-perawatan') }}">{{ __('Pemupukan & Perawatan') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.fleet-cartrack') ? 'active' : '' }}" href="{{ route('dashboard.fleet-cartrack') }}">{{ __('Fleet Cartrack') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.operasional-unit') ? 'active' : '' }}" href="{{ route('dashboard.operasional-unit') }}">{{ __('Operasional Unit') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.infrastruktur-jalan') ? 'active' : '' }}" href="{{ route('dashboard.infrastruktur-jalan') }}">{{ __('Infrastruktur Jalan') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.sampel-daun-lsu') ? 'active' : '' }}" href="{{ route('dashboard.sampel-daun-lsu') }}">{{ __('Sampel Daun (LSU)') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.assessmen-blok') ? 'active' : '' }}" href="{{ route('dashboard.assessmen-blok') }}">{{ __('Assessmen Blok') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.pembibitan') ? 'active' : '' }}" href="{{ route('dashboard.pembibitan') }}">{{ __('Pembibitan') }}</a>
-                            <a class="dropdown-item {{ request()->routeIs('dashboard.legal') ? 'active' : '' }}" href="{{ route('dashboard.legal') }}">{{ __('Legal') }}</a>
-                        </div>
-                    </li>
-
-                    <!-- 3. AI Chat (Dropdown) -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#navbar-ai-chat" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
-                                    <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">{{ __('AI Chat') }}</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#ai-analytic-curah-hujan">{{ __('AI Analytic Curah Hujan') }}</a>
-                        </div>
-                    </li>
-
-                    <!-- 4. Setting (Dropdown) -->
-                    <li class="nav-item dropdown {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#navbar-setting" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">{{ __('Setting') }}</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
-                                {{ __('Pengguna') }}
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                </div>
-            </div>
-        </header>
-
-        <!-- MAIN LAYOUT WRAPPER (SHORTCUT SIDEBAR + PAGE CONTENT) -->
-        <div class="d-flex flex-grow-1 position-relative" style="min-height: calc(100vh - 110px);">
+        <!-- MAIN LAYOUT WRAPPER (SHORTCUT SIDEBAR + RIGHT AREA) -->
+        <div class="d-flex flex-grow-1 position-relative" style="min-height: calc(100vh - 56px);">
             <!-- SHORTCUT SIDEBAR (KOTAK SHORTCUT WARNA GREY) -->
             <aside id="shortcut-sidebar" class="shortcut-sidebar border-end" aria-label="Menu Shortcut">
                 <div class="shortcut-header">
@@ -529,8 +430,120 @@
                 </div>
             </aside>
 
-            <!-- MAIN CONTENT WRAPPER -->
-            <div class="page-wrapper flex-grow-1 d-flex flex-column" style="min-width: 0;">
+            <!-- RIGHT AREA (SUB-HEADER NAVBAR + MAIN CONTENT) -->
+            <div class="d-flex flex-column flex-grow-1" style="min-width: 0;">
+                <!-- SUB-HEADER NAVBAR (Menu Mulai dari Sebelah Kanan Shortcut) -->
+                <header class="navbar navbar-expand border-bottom bg-body py-0 sub-navbar">
+                    <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-sm btn-icon btn-ghost-secondary d-md-none me-2" id="btn-mobile-shortcut" title="Buka Shortcut">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-primary" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
+                            </button>
+                            <ul class="navbar-nav flex-row flex-wrap align-items-center">
+                                <!-- 1. Beranda -->
+                                <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('dashboard') }}">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">{{ __('Beranda') }}</span>
+                                    </a>
+                                </li>
+
+                                <!-- 2. Dashboard (Dropdown) -->
+                                <li class="nav-item dropdown {{ request()->routeIs('dashboard.curah-hujan') ? 'active' : '' }}">
+                                    <a class="nav-link dropdown-toggle" href="#navbar-dashboard" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-box"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                                                <path d="M12 12l8 -4.5" />
+                                                <path d="M12 12l0 9" />
+                                                <path d="M12 12l-8 -4.5" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">{{ __('Dashboard') }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.curah-hujan') ? 'active' : '' }}" href="{{ route('dashboard.curah-hujan') }}">{{ __('Curah Hujan') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.aws') ? 'active' : '' }}" href="{{ route('dashboard.aws') }}">{{ __('AWS') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.areal-statement') ? 'active' : '' }}" href="{{ route('dashboard.areal-statement') }}">{{ __('Areal Statement') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.produksi') ? 'active' : '' }}" href="{{ route('dashboard.produksi') }}">{{ __('Produksi') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.analisa-produksi-kebun') ? 'active' : '' }}" href="{{ route('dashboard.analisa-produksi-kebun') }}">{{ __('Analisa Produksi Kebun') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.pemupukan-perawatan') ? 'active' : '' }}" href="{{ route('dashboard.pemupukan-perawatan') }}">{{ __('Pemupukan & Perawatan') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.fleet-cartrack') ? 'active' : '' }}" href="{{ route('dashboard.fleet-cartrack') }}">{{ __('Fleet Cartrack') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.operasional-unit') ? 'active' : '' }}" href="{{ route('dashboard.operasional-unit') }}">{{ __('Operasional Unit') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.infrastruktur-jalan') ? 'active' : '' }}" href="{{ route('dashboard.infrastruktur-jalan') }}">{{ __('Infrastruktur Jalan') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.sampel-daun-lsu') ? 'active' : '' }}" href="{{ route('dashboard.sampel-daun-lsu') }}">{{ __('Sampel Daun (LSU)') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.assessmen-blok') ? 'active' : '' }}" href="{{ route('dashboard.assessmen-blok') }}">{{ __('Assessmen Blok') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.pembibitan') ? 'active' : '' }}" href="{{ route('dashboard.pembibitan') }}">{{ __('Pembibitan') }}</a>
+                                        <a class="dropdown-item {{ request()->routeIs('dashboard.legal') ? 'active' : '' }}" href="{{ route('dashboard.legal') }}">{{ __('Legal') }}</a>
+                                    </div>
+                                </li>
+
+                                <!-- 3. AI Chat (Dropdown) -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#navbar-ai-chat" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+                                                <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">{{ __('AI Chat') }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#ai-analytic-curah-hujan">{{ __('AI Analytic Curah Hujan') }}</a>
+                                    </div>
+                                </li>
+
+                                <!-- 4. Setting (Dropdown) -->
+                                <li class="nav-item dropdown {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                                    <a class="nav-link dropdown-toggle" href="#navbar-setting" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">{{ __('Setting') }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                                            {{ __('Pengguna') }}
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- MAIN CONTENT WRAPPER -->
+                <div class="page-wrapper flex-grow-1 d-flex flex-column" style="min-width: 0;">
                 <div class="flex-grow-1">
                     @yield('content')
                 </div>
@@ -558,6 +571,7 @@
                         </div>
                     </div>
                 </footer>
+            </div>
             </div>
         </div>
     </div>

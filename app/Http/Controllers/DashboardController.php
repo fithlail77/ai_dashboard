@@ -65,9 +65,11 @@ class DashboardController extends Controller
      */
     public function curahHujan(): View
     {
-        $embedUrl = 'https://app.powerbi.com/view?r=eyJrIjoiOGU0NGUxODQtYzQ5NC00Mzk0LWJlODctMjZlMGMyNmY3OWZjIiwidCI6IjkzMzQ3NTJlLWIwM2EtNDUzNy04ZmY2LTU0ZDU3MGMzNWQyOCIsImMiOjEwfQ%3D%3D';
+        $embedUrl = config('powerbi.embed_url')
+            ?: 'https://app.powerbi.com/view?r=eyJrIjoiOGU0NGUxODQtYzQ5NC00Mzk0LWJlODctMjZlMGMyNmY3OWZjIiwidCI6IjkzMzQ3NTJlLWIwM2EtNDUzNy04ZmY2LTU0ZDU3MGMzNWQyOCIsImMiOjEwfQ%3D%3D';
+        $reportId = config('powerbi.report_id');
 
-        return view('admin.curah-hujan', compact('embedUrl'));
+        return view('admin.curah-hujan', compact('embedUrl', 'reportId'));
     }
 
     /**

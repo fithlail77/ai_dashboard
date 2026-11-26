@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CurahHujanAssistantController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/assessmen-blok', [DashboardController::class, 'assessmenBlok'])->name('dashboard.assessmen-blok');
     Route::get('/dashboard/pembibitan', [DashboardController::class, 'pembibitan'])->name('dashboard.pembibitan');
     Route::get('/dashboard/legal', [DashboardController::class, 'legal'])->name('dashboard.legal');
+
+    // Assistant AI Chat Power BI
+    Route::post('/dashboard/curah-hujan/chat', [CurahHujanAssistantController::class, 'chat'])->name('powerbi.assistant.chat');
+    Route::post('/dashboard/curah-hujan/reset', [CurahHujanAssistantController::class, 'reset'])->name('powerbi.assistant.reset');
 
     // Profil Pengguna (Edit Profile & Password)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
